@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - name: Version
+        id: version
+        uses: codacy/git-version@2.5.3
+        with:
+          release-branch: main
+          minor-identifier: /^feat(ure)?:/
+          prefix: v
+      - name: Replace version
+        run: |
+          sed -i "s/^Version: .*/Version: $(echo ${{ steps.version.outputs.version }} | tr -d v)/" amusing.php
+      - name: Build zip
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -X -r amusing-wordpress-plugin-${{ steps.version.outputs.version }}.zip amusing.php style.css traits
+      - name: Generate changelog
+        id: changelog
+        uses: ardalanamini/auto-changelog@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          exclude: 'ci,chore,test'
+      - name: Tag and Release
+        id: release
+        uses: avakar/tag-and-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          body: ${{ steps.changelog.outputs.changelog }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload zip
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: ./amusing-wordpress-plugin-${{ steps.version.outputs.version }}.zip
+          asset_name: amusing-wordpress-plugin-${{ steps.version.outputs.version }}.zip
+          asset_content_type: application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

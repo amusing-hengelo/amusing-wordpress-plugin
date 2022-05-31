@@ -9,7 +9,6 @@ trait WP_Amusing_Hengelo_Enrollments {
 		$enrollments = $this->get('festival/enrollments/'.$year);
 		if ($enrollments && !is_wp_error($enrollments) && (count($enrollments)>0)) {
 			$settings = stripslashes_deep(get_option('amusing-settings'));
-			$type = array_key_exists('table', $_REQUEST) ? $_REQUEST['table'] : null;
 			$table = '
 <table class="amusing-enrollments">
 	<thead>

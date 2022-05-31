@@ -9,7 +9,7 @@ trait WP_Amusing_Hengelo_Planning {
 		$planning = $this->get('festival/planning/'.$year);
 		if ($planning && !is_wp_error($planning)) {
 			$settings = stripslashes_deep(get_option('amusing-settings'));
-			$type = array_key_exists('table', $_REQUEST) ? $_REQUEST['table'] : null;
+			$type = array_key_exists('by', $_REQUEST) ? $_REQUEST['by'] : null;
 			$table = '
 <table class="amusing-planning">
 	<tbody>';

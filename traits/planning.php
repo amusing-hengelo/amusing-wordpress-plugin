@@ -55,7 +55,7 @@ trait WP_Amusing_Hengelo_Planning {
 				foreach ($groups as $id=>$group) {
 					$table .= '
 		<tr>
-			<td><b><a href="'.preg_replace('/\[id\]/', $performance->{'group-id'}, @$settings['groupurl']).'">'.htmlentities($group['name']).'</a></td>
+			<td><b><a href="'.preg_replace('/\[id\]/', $group['id'], $settings['groupurl']).'">'.htmlentities($group['name']).'</a></td>
 			<td>'.htmlentities($group['genre']).'</td>
 			<td>'.htmlentities($group['city']).'</td>
 		</tr>';

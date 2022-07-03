@@ -55,6 +55,13 @@ trait WP_Amusing_Hengelo_Settings {
 			'help'
 		);
 		add_settings_field(
+            'participants',
+            'Participants',
+            [$this, 'help_participants'],
+            'amusing',
+            'help'
+        );
+		add_settings_field(
             'group',
             'Group',
             [$this, 'help_group'],
@@ -132,7 +139,8 @@ trait WP_Amusing_Hengelo_Settings {
 
 
 	public function help_planning() {
-		echo '<p>Tag: <tt>[amusing-table-planning]</tt></p>';
+		echo '<p>Tag: <tt>[amusing-table-planning &lt;festival&gt;]</tt></p>';
+        echo '<p><tt>&lt;festival&gt;</tt>: Festival year, <tt>next</tt> or <tt>previous</tt></p>';
 		echo '<p class="description">Display planning inside a page.</p>';
 		echo '<p>Planning ready: <tt>[ready] ... [planning] ... [/ready]</tt></p>';
 		echo '<p>Planning not ready: <tt>[not-ready] ... [/not-ready]</tt></p>';
@@ -140,12 +148,21 @@ trait WP_Amusing_Hengelo_Settings {
 
 
 	public function help_enrollments() {
-		echo '<p>Tag: <tt>[amusing-table-enrollments]</tt></p>';
+		echo '<p>Tag: <tt>[amusing-table-enrollments &lt;festival&gt;]</tt></p>';
+        echo '<p><tt>&lt;festival&gt;</tt>: Festival year, <tt>next</tt> or <tt>previous</tt></p>';
 		echo '<p class="description">Display enrollments inside a page.</p>';
 		echo '<p>Groups are enrolled: <tt>[non-zero] ... [enrollments] ... [/non-zero]</tt></p>';
 		echo '<p>No groups are enrolled: <tt>[zero] ... [/zero]</tt></p>';
 		echo '<p>Number of enrollments: <tt>[count-enrollments]</tt></p>';
 	}
+
+
+	public function help_participants() {
+		echo '<p>Tag: <tt>[amusing-table-participants &lt;festival&gt;]</tt></p>';
+        echo '<p><tt>&lt;festival&gt;</tt>: Festival year, <tt>next</tt> or <tt>previous</tt></p>';
+        echo '<p class="description">Display participants inside a page.</p>';
+        echo '<p><tt>[participants]</tt></p>';
+    }
 
 
 	public function help_group() {

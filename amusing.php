@@ -23,6 +23,7 @@ if (!class_exists('WP_Amusing_Hengelo')) {
 
 		use WP_Amusing_Hengelo_Settings;
 		use WP_Amusing_Hengelo_Planning;
+		use WP_Amusing_Hengelo_Participants;
 		use WP_Amusing_Hengelo_Enrollments;
 		use WP_Amusing_Hengelo_Group;
 

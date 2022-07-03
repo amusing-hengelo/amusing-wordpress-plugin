@@ -4,7 +4,7 @@
 trait WP_Amusing_Hengelo_Participants {
 
 
-	private function participants($planning) {
+	private function participants($settings, $planning) {
 		$table = '
 <table class="amusing-participants">
     <tbody>';
@@ -40,7 +40,7 @@ trait WP_Amusing_Hengelo_Participants {
         $planning = $this->get('festival/planning/'.$year);
         $settings = stripslashes_deep(get_option('amusing-settings'));
         $festival_year = date('Y', strtotime($festival->date));
-		$table = $this->participants($planning);
+		$table = $this->participants($settings, $planning);
 		$content = preg_replace('/\[participants\]/', $table, $content);
 		$content = preg_replace('/\[year\]/', $festival_year, $content);
 		return $content;

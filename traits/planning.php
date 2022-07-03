@@ -4,7 +4,7 @@
 trait WP_Amusing_Hengelo_Planning {
 
 
-	private function performance_by_time($planning) {
+	private function performance_by_time($settings, $planning) {
 		$table = '
 <table class="amusing-planning">
 	<tbody>';
@@ -39,7 +39,7 @@ trait WP_Amusing_Hengelo_Planning {
 	}
 
 
-	private function performance_by_group($planning) {
+	private function performance_by_group($settings, $planning) {
 		$table = '
 <table class="amusing-planning">
     <tbody>';
@@ -79,7 +79,7 @@ trait WP_Amusing_Hengelo_Planning {
 	}
 
 
-	private function performance_by_podium($planning) {
+	private function performance_by_podium($settings, $planning) {
 		$table = '
 <table class="amusing-planning">
     <tbody>';
@@ -124,11 +124,11 @@ trait WP_Amusing_Hengelo_Planning {
             $festival_year = date('Y', strtotime($festival->date));
 			$type = array_key_exists('by', $_REQUEST) ? $_REQUEST['by'] : null;
 			if ($type == 'time')
-				$table = $this->performance_by_time($planning);
+				$table = $this->performance_by_time($settings, $planning);
 			elseif ($type == 'group')
-				$table = $this->performance_by_group($planning);
+				$table = $this->performance_by_group($settings, $planning);
 			else
-				$table = $this->performance_by_podium($planning);
+				$table = $this->performance_by_podium($settings, $planning);
 
 			$content = preg_replace('/\[ready\](.*)\[\/ready\]/s', '\1', $content);
 			$content = preg_replace('/\[not-ready\].*\[\/not-ready\]/s', '', $content);

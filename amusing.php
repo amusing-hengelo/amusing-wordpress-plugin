@@ -143,7 +143,5 @@ if (!class_exists('WP_Amusing_Hengelo')) {
 
 
 if (class_exists('WP_Amusing_Hengelo')) {
-	register_activation_hook(__FILE__, array('WP_Amusing_Hengelo', 'activate'));
-	register_deactivation_hook(__FILE__, array('WP_Amusing_Hengelo', 'deactivate'));
 	$wp_amusing_hengelo = new WP_Amusing_Hengelo();
 }

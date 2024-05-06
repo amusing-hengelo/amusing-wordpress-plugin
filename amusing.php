@@ -70,7 +70,7 @@ if (!class_exists('WP_Amusing_Hengelo')) {
 					$content = implode($parts);
 				}
 			}
-			return $head.$content;
+			return $content;
 		}
 
 
